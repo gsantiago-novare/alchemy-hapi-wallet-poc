@@ -13,8 +13,8 @@ const WalletRepository = {
       dbConn = await DatabaseConnection.connect();
 
       const insertQuery =
-        "INSERT INTO wallets (user_id) VALUES ($1) RETURNING *";
-      const result = await dbConn.query(insertQuery, [userId]);
+        "INSERT INTO wallets (user_id, balance, currency) VALUES ($1, $2, $3) RETURNING *";
+      const result = await dbConn.query(insertQuery, [userId, 1000, "PHP"]);
 
       return result.rows[0];
     } catch (error) {
@@ -65,7 +65,8 @@ const WalletRepository = {
         [senderWalletId],
       );
 
-      if (senderCheck.rows[0].balance < amount) {
+      const senderBalance = Number.parseFloat(senderCheck.rows[0].balance);
+      if (senderBalance < amount) {
         throw new ClientError("Insufficient funds.", 422);
       }
 
@@ -98,6 +99,9 @@ const WalletRepository = {
     } catch (error: any) {
       await dbConn.query("ROLLBACK");
       console.error("Error executing transfer:", error);
+      if (error instanceof ClientError) {
+        throw error;
+      }
       throw new ServerError("Transaction error: " + error.message, 500);
     } finally {
       dbConn?.release();

@@ -29,6 +29,7 @@ describe("Digital Wallet POC Endpoints", () => {
 
 		// Mock repository methods
 		vi.spyOn(UserRepository, "findByMobileNumber").mockResolvedValue(null);
+		vi.spyOn(UserRepository, "findByUsername").mockResolvedValue(null);
 		vi.spyOn(UserRepository, "registerUser").mockResolvedValue({
 			id: 1,
 			username: "testuser123",
@@ -206,7 +207,7 @@ describe("Digital Wallet POC Endpoints", () => {
 				password: "password123",
 			};
 
-			vi.spyOn(UserRepository, "findByMobileNumber").mockResolvedValue({
+			vi.spyOn(UserRepository, "findByUsername").mockResolvedValue({
 				id: 1,
 				username: "alice_wallet",
 				mobile_number: "09170000001",
@@ -300,7 +301,7 @@ describe("Digital Wallet POC Endpoints", () => {
 				password: "wrongpassword",
 			};
 
-			vi.spyOn(UserRepository, "findByMobileNumber").mockResolvedValue({
+			vi.spyOn(UserRepository, "findByUsername").mockResolvedValue({
 				id: 1,
 				username: "alice_wallet",
 				mobile_number: "09170000001",
@@ -339,7 +340,7 @@ describe("Digital Wallet POC Endpoints", () => {
 				password: "password123",
 			};
 
-			vi.spyOn(UserRepository, "findByMobileNumber").mockResolvedValue({
+			vi.spyOn(UserRepository, "findByUsername").mockResolvedValue({
 				id: 1,
 				username: "alice_wallet",
 				mobile_number: "09170000001",
