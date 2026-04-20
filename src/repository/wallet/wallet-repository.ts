@@ -51,6 +51,15 @@ const WalletRepository = {
 
       console.log("setting up update constraints");
 
+      const walletsCheck = await dbConn.query(
+        "SELECT id FROM wallets WHERE id IN ($1, $2)",
+        [senderWalletId, receiverWalletId],
+      );
+
+      if (walletsCheck.rows.length !== 2) {
+        throw new ClientError("Sender or receiver wallet not found.", 404);
+      }
+
       const [firstId, secondId] = [senderWalletId, receiverWalletId].sort(
         (a, b) => a - b,
       );
@@ -64,6 +73,12 @@ const WalletRepository = {
         "SELECT balance FROM wallets WHERE id = $1",
         [senderWalletId],
       );
+
+      if (!senderCheck.rows[0]) {
+        throw new ClientError("Sender wallet not found.", 404);
+      }
+
+      console.log("SENDER CHECK VALUES: ",senderCheck);
 
       const senderBalance = Number.parseFloat(senderCheck.rows[0].balance);
       if (senderBalance < amount) {
