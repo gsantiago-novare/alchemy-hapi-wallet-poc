@@ -1,0 +1,161 @@
+{
+  "info": {
+    "_postman_id": "5fdd3220-5cf8-46c9-8c6b-6ab494e889d8",
+    "name": "Hapi.js Digital Wallet POC",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "10156009"
+  },
+  "item": [
+    {
+      "name": "Registration Endpoint - FAIL",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"username\": \"test_user0\",\n    \"password\": \"password0\",\n    \"mobileNumber\": \"02199429090\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3003/express/authentication/registration/",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3003",
+          "path": [
+            "express",
+            "authentication",
+            "registration",
+            ""
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Login Endpoint - SUCCESS",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"username\": \"test_user0\",\n    \"password\": \"password0\",\n    \"mobileNumber\": \"09199429090\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3003/hapi/authentication/login",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3003",
+          "path": [
+            "hapi",
+            "authentication",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Login Endpoint - FAIL (No existing record)",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"username\": \"test_user0\",\n    \"password\": \"password0\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3003/hapi/authentication/login",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3003",
+          "path": [
+            "hapi",
+            "authentication",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Login Endpoint - FAIL (Invalid mobileNumber)",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"username\": \"test_user0\",\n    \"password\": \"password0\",\n    \"mobileNumber\": \"09199429090\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3003/hapi/authentication/login",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3003",
+          "path": [
+            "hapi",
+            "authentication",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Transfer Endpoint",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"senderWalletId\": 5,\n    \"receiverWalletId\": 6,\n    \"amount\": -1\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3003/hapi/transaction/transfer",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3003",
+          "path": [
+            "hapi",
+            "transaction",
+            "transfer"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
